@@ -8,7 +8,8 @@ try {
   const patch = core.getInput('patch');
   const revision = core.getInput('revision');
 
-  console.log(`${major}.${minor}.${patch}.${revision}`);
+  const version = `${major}.${minor}.${patch}.${revision}`;
+  core.setOutput("version", version);
 
   // `who-to-greet` input defined in action metadata file
   // const nameToGreet = core.getInput('who-to-greet');
