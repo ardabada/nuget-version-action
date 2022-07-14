@@ -9,12 +9,6 @@ inputs:
     description: 'Minor version'
     required: true
     default: 0
-  patch:
-    description: 'Patch version'
-    required: false
-  revision:
-    description: 'Revision version'
-    required: false
   package_type:
     description: 'Type of package'
     required: true
