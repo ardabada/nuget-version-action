@@ -1,14 +1,16 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { createActionAuth } = require("@octokit/auth-action");
 
 async function main() {
   try {
+
+    const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
 
     const major = core.getInput('major');
     const minor = core.getInput('minor');
     const patch = core.getInput('patch');
     const revision = core.getInput('revision');
+    const octokit = github.getOctokit(GITHUB_TOKEN);
 
     const username = github.context.payload.repository.owner.login;
 
@@ -17,13 +19,6 @@ async function main() {
 
     const version = `${major}.${minor}.${patch}.${revision}`;
     core.setOutput("version", version);
-
-    const auth = createActionAuth();
-    const authentication = await auth();  
-
-    const octokit = new Octokit({
-      auth: authentication.token
-    });
 
     var result = await octokit.request('GET /users/{username}/packages/{package_type}/{package_name}/versions', {
       package_type: package_type,
